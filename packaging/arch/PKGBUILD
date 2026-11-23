@@ -1,0 +1,34 @@
+# Maintainer: Matías
+# Paquete de Vexor para Arch / Omarchy. Compila desde el árbol local del repositorio.
+# Uso recomendado: ./scripts/instalar-omarchy.sh   (o, a mano, desde esta carpeta: makepkg -si)
+pkgname=vexor
+pkgver=0.6.1
+pkgrel=1
+pkgdesc="Terminal moderna con espacios de trabajo, IA, Git y Docker (Tauri + Rust)"
+arch=('x86_64')
+url="https://github.com/TU_USUARIO/vexor"
+license=('custom')
+depends=('webkit2gtk-4.1' 'gtk3' 'libsoup3')
+makedepends=('cargo' 'nodejs' 'npm')
+optdepends=('git: panel Git'
+            'docker: panel Docker'
+            'libnotify: avisos de comandos largos'
+            'iproute2: panel de puertos'
+            'less: ver archivos y el historial en el pager'
+            'ttf-jetbrains-mono-nerd: fuente recomendada')
+options=('!lto' '!debug')
+source=()
+
+build() {
+  cd "$startdir/../.."
+  npm ci --no-audit --no-fund
+  npm run tauri build -- --no-bundle
+}
+
+package() {
+  cd "$startdir/../.."
+  install -Dm755 src-tauri/target/release/vexor "$pkgdir/usr/bin/vexor"
+  install -Dm644 packaging/vexor.desktop "$pkgdir/usr/share/applications/vexor.desktop"
+  install -Dm644 src-tauri/icons/icon.png "$pkgdir/usr/share/icons/hicolor/512x512/apps/vexor.png"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

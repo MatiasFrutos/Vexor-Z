@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vexor</title>
+</head>
+<body>
+  <div id="app">
+    <header id="tabbar">
+      <div id="logo"><span class="mark"></span></div>
+      <div id="ws-slot"><button id="ws-btn" class="ws-btn" aria-haspopup="menu"></button></div>
+      <div id="tabs-slot"><div id="tabs"></div><button id="newtab-btn" class="icon-btn" title="Nueva pestaña" aria-label="Nueva pestaña">+</button></div>
+      <div id="tabbar-actions"></div>
+    </header>
+    <div id="body">
+      <aside id="vtabs" hidden>
+        <div id="vt-ws"></div>
+        <div id="vt-tabs"></div>
+        <div class="vt-foot"><button id="vt-new" class="vt-new">+ Nueva pestaña</button></div>
+      </aside>
+      <main id="stage">
+        <div id="findbar" hidden>
+          <input id="find-input" placeholder="Buscar en el panel…" autocomplete="off" spellcheck="false" />
+          <span id="find-count"></span>
+          <button id="find-case" class="tgl" title="Distinguir mayúsculas">Aa</button>
+          <button id="find-re" class="tgl" title="Expresión regular">.*</button>
+          <button id="find-prev" class="icon-btn" title="Anterior (Mayús+Enter)"></button>
+          <button id="find-next" class="icon-btn" title="Siguiente (Enter)"></button>
+          <button id="find-close" class="icon-btn" title="Cerrar (Esc)"></button>
+        </div>
+      </main>
+      <aside id="side" hidden></aside>
+    </div>
+    <footer id="status"></footer>
+    <div id="palette" class="overlay" hidden>
+      <div class="box">
+        <input id="palette-input" placeholder="Escribe un comando…" autocomplete="off" spellcheck="false" />
+        <ul id="palette-list"></ul>
+      </div>
+    </div>
+    <div id="settings" class="overlay" hidden></div>
+    <div id="aibar" class="overlay" hidden></div>
+    <div id="dialog" class="overlay" hidden></div>
+    <div id="history" class="overlay" hidden></div>
+    <div id="help" class="overlay" hidden></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

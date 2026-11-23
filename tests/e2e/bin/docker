@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+# docker FALSO solo para probar el panel de Docker (mantiene el estado en un archivo)
+import json, sys, os
+f = os.environ.get('FAKE_DOCKER_STATE', '/tmp/vexor-fake-docker.json')
+st = json.load(open(f)) if os.path.exists(f) else [
+  {"Names":"web-api","Image":"node:22-alpine","State":"running","Status":"Up 2 hours","Ports":"0.0.0.0:3000->3000/tcp"},
+  {"Names":"postgres","Image":"postgres:16","State":"running","Status":"Up 2 hours","Ports":"5432/tcp"},
+  {"Names":"redis-cache","Image":"redis:7","State":"exited","Status":"Exited (0) 3 days ago","Ports":""}]
+a = sys.argv[1:]
+if a[:1] == ['ps']:
+    for c in st: print(json.dumps(c))
+elif a[:1] in (['stop'], ['start'], ['restart']):
+    for c in st:
+        if c["Names"] == a[1]:
+            c["State"] = 'exited' if a[0] == 'stop' else 'running'
+            c["Status"] = 'Exited (0) just now' if a[0] == 'stop' else 'Up 1 second'
+    json.dump(st, open(f, 'w')); print(a[1])
+else:
+    print('docker fake:', ' '.join(a))

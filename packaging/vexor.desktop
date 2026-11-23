@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Vexor
+GenericName=Terminal
+Comment=Terminal moderna con espacios de trabajo, IA, Git y Docker
+Exec=vexor
+Icon=vexor
+Terminal=false
+Type=Application
+Categories=System;TerminalEmulator;
+Keywords=terminal;shell;consola;
+StartupWMClass=vexor
